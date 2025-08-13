@@ -1,0 +1,233 @@
+/* admin/style.css */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --bg-color: #f8f9fa;
+    --sidebar-bg: #343a40;
+    --sidebar-text: #f8f9fa;
+    --sidebar-active: #007bff;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar h2 {
+    padding: 20px;
+    margin: 0;
+    text-align: center;
+    background-color: rgba(255,255,255,0.05);
+    font-size: 1.5rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    flex-grow: 1;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.sidebar ul li a:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.sidebar ul li a.active {
+    background-color: var(--sidebar-active);
+    font-weight: bold;
+}
+
+.logout-section {
+    padding: 20px;
+    text-align: center;
+}
+.logout-section a {
+    color: var(--text-muted);
+    text-decoration: none;
+}
+.logout-section a:hover {
+    color: var(--sidebar-text);
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-header {
+    background-color: var(--card-bg);
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.main-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.content-area {
+    padding: 30px;
+    flex-grow: 1;
+}
+
+/* Cards for Dashboard */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.card .metric {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+td a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+td a:hover {
+    text-decoration: underline;
+}
+
+/* Forms */
+.form-container {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin-top: 20px;
+}
+.form-container h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-links a {
+    margin-right: 10px;
+}
+.action-links a:last-child {
+    margin-right: 0;
+}

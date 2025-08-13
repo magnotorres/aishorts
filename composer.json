@@ -1,0 +1,33 @@
+{
+    "name": "vendor_name/ai-video-automation",
+    "description": "A PHP application to automate the creation and publication of short-form videos to social media platforms.",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jules - AI Software Engineer",
+            "email": "jules@example.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "google/apiclient": "^2.15",
+        "facebook/graph-sdk": "^5.7",
+        "vlucas/phpdotenv": "^5.5"
+    },
+    "autoload": {
+        "files": [
+            "config.php",
+            "functions.php"
+        ]
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t admin/",
+        "run-bot": "php run.php"
+    }
+}
