@@ -49,14 +49,22 @@ date_default_timezone_set('UTC');
  * Initializes the required directories for logs and videos.
  * This function is called automatically when config.php is included.
  */
-function initialize_project_directories() {
-    if (!is_dir(DIR_VIDEOS)) {
-        mkdir(DIR_VIDEOS, 0775, true);
-    }
-    if (!is_dir(DIR_LOGS)) {
-        mkdir(DIR_LOGS, 0775, true);
+
+if (!function_exists('initialize_project_directories')) {
+    /**
+     * Initializes the required directories for logs and videos.
+     * This function is called automatically when config.php is included.
+     */
+    function initialize_project_directories() {
+        if (!is_dir(DIR_VIDEOS)) {
+            mkdir(DIR_VIDEOS, 0775, true);
+        }
+        if (!is_dir(DIR_LOGS)) {
+            mkdir(DIR_LOGS, 0775, true);
+        }
     }
 }
+
 
 // Run the directory setup.
 initialize_project_directories();
