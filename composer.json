@@ -14,7 +14,6 @@
         "ext-pdo": "*",
         "ext-json": "*",
         "google/apiclient": "^2.15",
-        "facebook/graph-sdk": "^5.7",
         "vlucas/phpdotenv": "^5.5"
     },
     "autoload": {
