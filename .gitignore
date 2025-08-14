@@ -3,5 +3,4 @@ logs/
 *.log
 .env
 composer.lock
-composer.phar
 .dh-diag

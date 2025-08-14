@@ -9,12 +9,6 @@
             "email": "jules@example.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://repo.packagist.org"
-        }
-    ],
     "require": {
         "php": ">=8.1",
         "ext-pdo": "*",
@@ -24,8 +18,7 @@
     },
     "autoload": {
         "files": [
-            "config.php",
-            "functions.php"
+            "config.php"
         ]
     },
     "config": {
