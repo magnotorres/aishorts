@@ -8,6 +8,9 @@
  * API communications, social media operations, and business intelligence.
  */
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+
 // Ensure config is loaded
 if (file_exists(__DIR__ . '/config.php')) {
     require_once __DIR__ . '/config.php';
@@ -159,24 +162,87 @@ function generate_text_content($base_prompt) {
 // =============================================================================
 
 /**
- * A generic placeholder for publishing content to a social platform.
+ * Publishes content to a social platform.
+ *
+ * This function handles the actual publishing logic. It currently has a
+ * real implementation for Facebook and simulates the process for others.
  *
  * @param array $account The social account details.
  * @param string $video_path Path to the video file.
  * @param string $title The title for the post.
  * @param string $description The description for the post.
- * @return string A simulated URL to the new post.
+ * @return string|false A URL to the new post, or false on failure.
  */
 function publish_to_platform($account, $video_path, $title, $description) {
     $platform = $account['platform'];
     log_message("Attempting to publish to {$platform} for account {$account['account_name']}.");
 
-    // ** SIMULATION **
-    // This is where you would integrate the specific SDK for each platform.
-    // e.g., for YouTube: use the `google/apiclient` library.
-    // e.g., for Facebook: use the `facebook/graph-sdk`.
+    if ($platform === 'facebook') {
+        $credentials = $account['credentials'];
+        if (empty($credentials['page_id']) || empty($credentials['user_access_token'])) {
+            log_message("Facebook credentials (page_id, user_access_token) are missing for account {$account['account_name']}.", "ERROR");
+            return false;
+        }
 
-    // Simulate a successful upload
+        // Use a modern Guzzle client
+        $client = new Client();
+        $page_id = $credentials['page_id'];
+        $access_token = $credentials['user_access_token'];
+        $api_version = 'v19.0'; // It's good practice to lock to a version
+        $url = "https://graph-video.facebook.com/{$api_version}/{$page_id}/videos";
+
+        try {
+            $response = $client->post($url, [
+                'multipart' => [
+                    [
+                        'name' => 'access_token',
+                        'contents' => $access_token,
+                    ],
+                    [
+                        'name' => 'source',
+                        'contents' => fopen($video_path, 'r'),
+                        'filename' => basename($video_path),
+                    ],
+                    [
+                        'name' => 'description',
+                        'contents' => $description,
+                    ],
+                    [
+                        'name' => 'title',
+                        'contents' => $title,
+                    ],
+                ],
+                'timeout' => 120, // Set a longer timeout for video uploads
+                'connect_timeout' => 10,
+            ]);
+
+            $body = json_decode((string) $response->getBody(), true);
+
+            if (isset($body['id'])) {
+                // The video is uploaded. We can construct a permalink.
+                $post_url = "https://www.facebook.com/videos/{$body['id']}/";
+                log_message("Successfully published to Facebook. Post ID: {$body['id']}. URL: {$post_url}");
+                return $post_url;
+            } else {
+                log_message("Facebook API response did not contain a post ID. Response: " . (string) $response->getBody(), "ERROR");
+                return false;
+            }
+        } catch (GuzzleException $e) {
+            log_message("Failed to publish to Facebook. Error: " . $e->getMessage(), "ERROR");
+            // Log response body if available for more context
+            if ($e->hasResponse()) {
+                log_message("Facebook error response: " . (string) $e->getResponse()->getBody(), "ERROR");
+            }
+            return false;
+        }
+    }
+
+    // ** SIMULATION for other platforms **
+    // This is where you would integrate the specific SDK for other platforms.
+    // e.g., for YouTube: use the `google/apiclient` library.
+
+    // Simulate a successful upload for non-Facebook platforms
+    log_message("Simulating successful upload for {$platform}.");
     sleep(2); // Simulate API call latency
     $post_url = "https://www.{$platform}.com/post/" . uniqid();
     log_message("Successfully published to {$platform}. URL: {$post_url}");
