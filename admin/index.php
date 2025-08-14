@@ -62,3 +62,4 @@ $avg_shares = $engagement['avg_shares'] ? number_format($engagement['avg_shares'
 <?php
 require_once __DIR__ . '/footer.php'; // Include footer
 ?>
+
