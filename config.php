@@ -30,7 +30,7 @@ define('DB_CHARSET', 'utf8mb4');
 define('DIR_VIDEOS', __DIR__ . '/generated_videos');
 define('DIR_LOGS', __DIR__ . '/logs');
 
-// 3. Google AI (Veo) API Configuration
+// 3. Google AI (Veo) API ration
 // ---
 define('GOOGLE_AI_API_KEY', $_ENV['GOOGLE_AI_API_KEY'] ?? '');
 
