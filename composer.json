@@ -17,9 +17,7 @@
         "vlucas/phpdotenv": "^5.5"
     },
     "autoload": {
-        "files": [
-            "config.php"
-        ]
+        "files": []
     },
     "config": {
         "vendor-dir": "vendor"
